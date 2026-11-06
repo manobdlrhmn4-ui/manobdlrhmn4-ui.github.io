@@ -1,10 +1,13 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ARTIVO | لكل فكرة هوية</title>
+
+<!-- Google Search Console Verification -->
+<meta name="google-site-verification" content="8C9KO8cGRnViIMJ0y7-Gf66DaIckUKJPGd_cZuFBX3U" />
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:Arial,sans-serif;background:#090b16;color:#fff;line-height:1.7}
@@ -56,7 +59,7 @@ section{padding:48px 6%}
 }
 </style>
 </head>
-  <meta name="google-site-verification" content="8C9KO8cGRnViIMJ0y7-Gf66DaIckUKJPGd_cZuFBX3U" />
+
 <body>
 
 <header>
@@ -70,6 +73,7 @@ section{padding:48px 6%}
 </header>
 
 <main>
+
 <section class="hero" id="home">
   <div class="tag">مساحة الإبداع والهوية</div>
   <h1>لكل فكرة هوية،<br><span>وهويتك ARTIVO</span></h1>
@@ -120,10 +124,13 @@ section{padding:48px 6%}
   <form id="postForm">
     <label>عنوان العمل</label>
     <input id="postTitle" required maxlength="60" placeholder="مثال: شعار مطعمي الجديد">
+
     <label>اختر الصورة</label>
     <input id="postImage" type="file" accept="image/*" required>
+
     <label>وصف العمل</label>
     <textarea id="postDescription" required maxlength="300" placeholder="اكتب شيئًا عن إبداعك..."></textarea>
+
     <button class="btn" type="submit">نشر العمل</button>
     <p class="notice">المنشورات تُحفظ على هذا الجهاز في هذه النسخة التجريبية.</p>
     <div id="postMessage"></div>
@@ -135,9 +142,11 @@ section{padding:48px 6%}
     <h2>اطلب تصميمك</h2>
     <p>أخبرنا عن مشروعك والتصميم الذي تحلم به.</p>
   </div>
+
   <form id="requestForm">
     <label>اسمك</label>
     <input id="clientName" required placeholder="اكتب اسمك">
+
     <label>الدولة</label>
     <select id="country" required>
       <option value="">اختر الدولة</option>
@@ -150,10 +159,13 @@ section{padding:48px 6%}
       <option>فرنسا</option>
       <option>دولة أخرى</option>
     </select>
+
     <label>المدينة أو الولاية</label>
     <input id="region" required placeholder="مثال: الجزائر العاصمة">
+
     <label>اسم المشروع أو الشركة</label>
     <input id="projectName" required placeholder="اسم مشروعك">
+
     <label>نوع التصميم</label>
     <select id="designType" required>
       <option value="">اختر نوع التصميم</option>
@@ -163,10 +175,13 @@ section{padding:48px 6%}
       <option>صورة مصغرة لليوتيوب</option>
       <option>تصميم آخر</option>
     </select>
+
     <label>الألوان المفضلة</label>
     <input id="colors" placeholder="مثال: الأسود والأزرق">
+
     <label>تفاصيل إضافية</label>
     <textarea id="details" placeholder="صف لنا فكرتك وما تريده..."></textarea>
+
     <button class="btn" type="submit">إرسال طلب التصميم</button>
     <p class="notice">هذه نسخة تجريبية: يُحفظ الطلب على الجهاز ولا يُرسل إلى فريق ARTIVO بعد.</p>
     <div id="message">تم حفظ طلبك في هذه النسخة التجريبية بنجاح!</div>
@@ -178,9 +193,10 @@ section{padding:48px 6%}
     <h2>كن جزءًا من ARTIVO</h2>
     <p>الإبداع يبدأ بفكرة، وربما تكون فكرتك هي القادمة.</p>
     <br>
-    <a class="btn" href="https://instagram.com/manobdlrhmn4" target="_blank">تابعنا على Instagram</a>
+    <a class="btn" href="https://instagram.com/manobdlrhmn4" target="_blank" rel="noopener">تابعنا على Instagram</a>
   </div>
 </section>
+
 </main>
 
 <footer>
@@ -194,87 +210,118 @@ section{padding:48px 6%}
 const postsArea = document.getElementById("posts");
 
 function getPosts(){
-  try{return JSON.parse(localStorage.getItem("artivo_posts") || "[]")}
-  catch(e){return []}
+  try {
+    return JSON.parse(localStorage.getItem("artivo_posts") || "[]");
+  } catch(e) {
+    return [];
+  }
 }
 
 function renderPosts(){
-  const posts=getPosts();
+  const posts = getPosts();
+
   if(!posts.length){
-    postsArea.innerHTML='<div class="empty">لا توجد منشورات بعد. كن أول من يشارك!</div>';
+    postsArea.innerHTML = '<div class="empty">لا توجد منشورات بعد. كن أول من يشارك!</div>';
     return;
   }
-  postsArea.innerHTML="";
-  posts.forEach(post=>{
-    const item=document.createElement("article");
-    item.className="gallery-item";
-    const img=document.createElement("img");
-    img.src=post.image;
-    img.alt=post.title;
-    const content=document.createElement("div");
-    const title=document.createElement("h3");
-    title.textContent=post.title;
-    const desc=document.createElement("p");
-    desc.textContent=post.description;
-    content.append(title,desc);
-    item.append(img,content);
+
+  postsArea.innerHTML = "";
+
+  posts.forEach(post => {
+    const item = document.createElement("article");
+    item.className = "gallery-item";
+
+    const img = document.createElement("img");
+    img.src = post.image;
+    img.alt = post.title;
+
+    const content = document.createElement("div");
+
+    const title = document.createElement("h3");
+    title.textContent = post.title;
+
+    const desc = document.createElement("p");
+    desc.textContent = post.description;
+
+    content.append(title, desc);
+    item.append(img, content);
     postsArea.append(item);
   });
 }
 
-document.getElementById("postForm").addEventListener("submit",function(e){
+document.getElementById("postForm").addEventListener("submit", function(e){
   e.preventDefault();
-  const file=document.getElementById("postImage").files[0];
-  if(!file)return;
-  if(file.size>1024*1024){
+
+  const file = document.getElementById("postImage").files[0];
+  if(!file) return;
+
+  if(!file.type.startsWith("image/")){
+    alert("يرجى اختيار صورة صحيحة.");
+    return;
+  }
+
+  if(file.size > 1024*1024){
     alert("اختر صورة حجمها أقل من 1 ميغابايت.");
     return;
   }
-  const reader=new FileReader();
-  reader.onload=function(){
-    const posts=getPosts();
+
+  const reader = new FileReader();
+
+  reader.onload = function(){
+    const posts = getPosts();
+
     posts.unshift({
-      title:document.getElementById("postTitle").value,
-      description:document.getElementById("postDescription").value,
-      image:reader.result
+      title: document.getElementById("postTitle").value,
+      description: document.getElementById("postDescription").value,
+      image: reader.result
     });
-    try{
-      localStorage.setItem("artivo_posts",JSON.stringify(posts));
+
+    try {
+      localStorage.setItem("artivo_posts", JSON.stringify(posts));
       renderPosts();
       document.getElementById("postForm").reset();
-      document.getElementById("postMessage").textContent="تم نشر عملك على هذا الجهاز!";
-    }catch(error){
+      document.getElementById("postMessage").textContent = "تم نشر عملك على هذا الجهاز!";
+    } catch(error) {
       alert("مساحة التخزين غير كافية. جرّب صورة أصغر.");
     }
   };
+
   reader.readAsDataURL(file);
 });
 
-document.getElementById("requestForm").addEventListener("submit",function(e){
+document.getElementById("requestForm").addEventListener("submit", function(e){
   e.preventDefault();
-  const request={
-    name:document.getElementById("clientName").value,
-    country:document.getElementById("country").value,
-    region:document.getElementById("region").value,
-    project:document.getElementById("projectName").value,
-    type:document.getElementById("designType").value,
-    colors:document.getElementById("colors").value,
-    details:document.getElementById("details").value,
-    date:new Date().toLocaleDateString("ar")
+
+  const request = {
+    name: document.getElementById("clientName").value,
+    country: document.getElementById("country").value,
+    region: document.getElementById("region").value,
+    project: document.getElementById("projectName").value,
+    type: document.getElementById("designType").value,
+    colors: document.getElementById("colors").value,
+    details: document.getElementById("details").value,
+    date: new Date().toLocaleDateString("ar")
   };
-  let requests=[];
-  try{
-    requests=JSON.parse(localStorage.getItem("artivo_requests")||"[]");
-    requests.push(request);
-    localStorage.setItem("artivo_requests",JSON.stringify(requests));
-    document.getElementById("message").style.display="block";
+
+  let requests = [];
+
+  try {
+    requests = JSON.parse(localStorage.getItem("artivo_requests") || "[]");
+    requests.unshift(request);
+
+    localStorage.setItem("artivo_requests", JSON.stringify(requests));
+
+    document.getElementById("message").style.display = "block";
     this.reset();
-  }catch(error){
+
+  } catch(error) {
     alert("تعذر حفظ الطلب على هذا الجهاز.");
   }
 });
 
 renderPosts();
 </script>
+
 </body>
 </html>
+
